@@ -1,0 +1,6 @@
+[
+  {
+    "type": "sqlite",
+    "path": "d:\\Projetos\\web-api-security\\banco.sqlite"
+  }
+]
