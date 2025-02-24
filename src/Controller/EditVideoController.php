@@ -16,7 +16,7 @@ class EditVideoController implements Controller
     public function processaRequisicao(): void
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        if ($id === false || $id === null) {
+        if (empty($id)) {
             header('Location: /?sucesso=0');
             return;
         }
@@ -39,8 +39,8 @@ class EditVideoController implements Controller
 
         if ($success === false) {
             header('Location: /?sucesso=0');
-        } else {
-            header('Location: /?sucesso=1');
         }
+
+        header('Location: /?sucesso=1');
     }
 }

@@ -16,9 +16,11 @@ class VideoFormController implements Controller
     public function processaRequisicao(): void
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
         /** @var ?Video $video */
         $video = null;
-        if ($id !== false && $id !== null) {
+
+        if (!empty($id)) {
             $video = $this->repository->find($id);
         }
 
