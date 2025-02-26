@@ -29,6 +29,7 @@ class LoginController implements Controller
         $validPassword = password_verify($password, $userData['password'] ?? '');
 
         if ($validPassword) {
+            $_SESSION['logado'] = true;
             header('Location: /');
         }
 
