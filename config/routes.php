@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Alura\Mvc\Controller\LoginController;
+use Alura\Mvc\Controller\LogoutController;
 use Alura\Mvc\Controller\NewVideoController;
 use Alura\Mvc\Controller\EditVideoController;
 use Alura\Mvc\Controller\LoginFormController;
@@ -19,4 +20,5 @@ return [
     'GET|/remover-video' => DeleteVideoController::class,
     'GET|/login' => LoginFormController::class,
     'POST|/login' => LoginController::class,
+    'GET|/logout' => LogoutController::class,
 ];
