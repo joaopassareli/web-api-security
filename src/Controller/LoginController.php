@@ -19,7 +19,7 @@ class LoginController implements Controller
 	{
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'password');
-		$sql = "SELECRT * FROM users WHERE email = ?;";
+		$sql = "SELECT * FROM users WHERE email = ?;";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $email);
@@ -29,6 +29,13 @@ class LoginController implements Controller
         $validPassword = password_verify($password, $userData['password'] ?? '');
 
         if ($validPassword) {
+            if (password_needs_rehash($userData['password'], PASSWORD_ARGON2ID)) {
+                $sql = "UPDATE users SET password = ? WHERE id = ?;";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->bindValue(1, password_hash($password, PASSWORD_ARGON2ID));
+                $stmt->bindValue(2, $userData['id']);
+                $stmt->execute();
+            }
             $_SESSION['logado'] = true;
             header('Location: /');
         }
